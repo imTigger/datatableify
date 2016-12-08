@@ -7,7 +7,7 @@
 	],
 	"main": "jquery.datatableify.js",
 	"ignore": [
-		"**/.gitignore",
+		"**/.gitignore"
 	],
 	"dependencies": {
 		"jquery": ">= 1.6",
