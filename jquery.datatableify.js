@@ -24,6 +24,7 @@
             } else {
                 cols.push({
                     data: $(v).data('datatable-id'),
+                    name: $(v).data('datatable-name'),
                     searchable: $(v).data('datatable-searchable'),
                     searchType: $(v).data('datatable-search-type'),
                     searchCustom: $(v).data('datatable-search-custom'),
