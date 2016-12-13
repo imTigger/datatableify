@@ -42,7 +42,12 @@
             order: [[firstColumn, "desc"]]
         };
 
-        // Ajax table
+        // Ajax json table
+        if (settings.ajaxUrl != null) {
+            dataTableOptions.ajax = settings.ajaxUrl;
+        }
+        
+        // Ajax server side table
         if (settings.ajaxLoadUrl != null) {
             dataTableOptions.serverSide = true;
             dataTableOptions.ajax = {
