@@ -141,5 +141,7 @@
 
             $this.addClass('table-sortable');
         }
+        
+        return dataTable;
     };
 }(jQuery));
