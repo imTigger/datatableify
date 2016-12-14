@@ -139,7 +139,7 @@
 
             });
 
-            $this.addClass('table-sortable');
+            $this.addClass('table-reorderable');
         }
         
         return dataTable;
