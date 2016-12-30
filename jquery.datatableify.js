@@ -45,7 +45,7 @@
         
         // Ajax server side table
         if (dataTableOptions.ajaxLoadUrl != null) {
-            dataTableOptions.processing: true;
+            dataTableOptions.processing = true;
             dataTableOptions.serverSide = true;
             dataTableOptions.ajax = {
                 url: dataTableOptions.ajaxLoadUrl,
