@@ -55,10 +55,12 @@
                 url: settings.ajaxLoadUrl,
                 data: function (d) {
                     $('.datatable-filter').each(function (k, v) {
-                        var name = $(v).prop('name')
-                        var value = $(v).val();
+                        if (!$(v).is(':checkbox') || ($(v).is(':checkbox') && $(v).is(':checked'))) {
+                            var name = $(v).prop('name');
+                            var value = $(v).val();
 
-                        d[name] = value;
+                            d[name] = value;
+                        }
                     });
                 }
             };
