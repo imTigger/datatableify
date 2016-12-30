@@ -3,7 +3,11 @@
         var $this = $(this);
 
         var dataTable;
-        var settings = $.extend({
+        var dataTableOptions = $.extend({
+            searching: true,
+            responsive: true,
+
+            // Shortcut variables
             ajaxLoadUrl: null,
             ajaxOrderUrl: null
         }, options);
@@ -11,6 +15,7 @@
         var cols = [];
         var firstColumn = 0;
 
+        // Gather column information from thead
         $this.find('thead tr th').each(function (k, v) {
             if ($(v).data('datatable-ignore')) {
                 cols.push({
@@ -35,24 +40,15 @@
             }
         });
 
-        var dataTableOptions = {
-            processing: true,
-            searching: true,
-            columns: cols,
-            responsive: true,
-            order: [[firstColumn, "desc"]]
-        };
-
-        // Ajax json table
-        if (settings.ajaxUrl != null) {
-            dataTableOptions.ajax = settings.ajaxUrl;
-        }
+        dataTableOptions.columns = cols;
+        dataTableOptions.order = [[firstColumn, "desc"]];
         
         // Ajax server side table
-        if (settings.ajaxLoadUrl != null) {
+        if (dataTableOptions.ajaxLoadUrl != null) {
+            dataTableOptions.processing: true;
             dataTableOptions.serverSide = true;
             dataTableOptions.ajax = {
-                url: settings.ajaxLoadUrl,
+                url: dataTableOptions.ajaxLoadUrl,
                 data: function (d) {
                     $('.datatable-filter').each(function (k, v) {
                         if (!$(v).is(':checkbox') || ($(v).is(':checkbox') && $(v).is(':checked'))) {
@@ -67,7 +63,7 @@
         }
 
         // Disable paging for order table
-        if (settings.ajaxOrderUrl != null) {
+        if (dataTableOptions.ajaxOrderUrl != null) {
             dataTableOptions.rowReorder = true;
             dataTableOptions.paging = false;
         }
@@ -122,7 +118,7 @@
         });
 
         // Row Reorder
-        if (settings.ajaxOrderUrl != null) {
+        if (dataTableOptions.ajaxOrderUrl != null) {
             dataTable.on('row-reorder.dt', function (dragEvent, data, nodes) {
                 var rowIndex0 = data[0].node._DT_RowIndex;
                 var rowData0 = dataTable.row(rowIndex0).data();
@@ -130,7 +126,7 @@
                 var rowData1 = dataTable.row(rowIndex1).data();
 
                 $.ajax({
-                    url: settings.ajaxOrderUrl,
+                    url: dataTableOptions.ajaxOrderUrl,
                     type: 'post',
                     dataType: 'json',
                     data: {
