@@ -44,6 +44,10 @@
         dataTableOptions.order = [[firstColumn, "desc"]];
         
         // Ajax server side table
+        if ($(this).data('datatableAjaxLoadUrl')) {
+            dataTableOptions.ajaxLoadUrl = $(this).data('datatableAjaxLoadUrl');
+        }
+
         if (dataTableOptions.ajaxLoadUrl != null) {
             dataTableOptions.processing = true;
             dataTableOptions.serverSide = true;
@@ -118,6 +122,9 @@
         });
 
         // Row Reorder
+        if ($(this).data('datatableAjaxOrderUrl')) {
+            dataTableOptions.ajaxOrderUrl = $(this).data('datatableAjaxOrderUrl');
+        }
         if (dataTableOptions.ajaxOrderUrl != null) {
             dataTable.on('row-reorder.dt', function (dragEvent, data, nodes) {
                 var rowIndex0 = data[0].node._DT_RowIndex;
