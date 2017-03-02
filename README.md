@@ -2,16 +2,19 @@
 jQuery plugin enable you to use HTML5 data-* attributes to simpified [DataTables](https://datatables.net/DataTables) initialization and configuration
 
 ## Parameters
-### <table> Level
-- `data-datatable-ajax-load-url` => `dt.processing` = true, `dt.serverSide` = true, `dataTableOptions.ajax` = ajaxLoadUrl
-- `data-datatable-ajax-order-url`
-- 
-### <th> Level
- - `data-datatable-id` => `columns.data`
- - `data-datatable-name` => `columns.name`
- - `data-datatable-searchable` => `columns.searchable`
- - `data-datatable-sortable` => `columns.sortable`
- - `data-datatable-class` => `columns.className`
+### &lt;table&gt; Level Mapping
+- If `data-datatable-ajax-load-url` is set, it will be mapped to `dataTable.ajax.url`.
+  `dataTable.ajax.processing` &amp; ``dataTable.ajax.serverSide` is set to `true` automagically.
+
+- If `data-datatable-ajax-order-url` is set, `row-reorder.dt` event will be listened, creating ajax request to that url. 
+  `dataTable.rowReorder` is set to true, `dataTable.paging` is set to `false`
+
+### &lt;th&gt; Level Mapping
+ - `data-datatable-id` is mapped to `columns.data`
+ - `data-datatable-name` is mapped to `columns.name`
+ - `data-datatable-searchable` is mapped to `columns.searchable`
+ - `data-datatable-sortable` is mapped to `columns.sortable`
+ - `data-datatable-class` is mapped to `columns.className`
 
 ## Example 1 (Server Side Table with Column Configuration)
 ```
