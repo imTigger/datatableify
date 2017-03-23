@@ -40,8 +40,10 @@
             }
         });
 
+        if (typeof dataTableOptions.order == 'undefined') {
+            dataTableOptions.order = [[firstColumn, "desc"]];
+        }
         dataTableOptions.columns = cols;
-        dataTableOptions.order = [[firstColumn, "desc"]];
         
         // Ajax server side table
         if ($(this).data('datatableAjaxLoadUrl')) {
