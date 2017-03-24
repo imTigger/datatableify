@@ -85,7 +85,7 @@
                     $this.find('.select_' + cols[k]['data']).append('<option value=""></option>');
 
                     for (var i in cols[k]['searchOptions']) {
-                        $this.find('.select_' + cols[k]['data']).append('<option value="' + i + '">' + cols[k]['searchOptions'][i] + '</option>');
+                        $this.find('.select_' + cols[k]['data']).append('<option value="' + cols[k]['searchOptions'][i].key + '">' + cols[k]['searchOptions'][i].value + '</option>');
                     }
                 } else if (cols[k]['searchType'] == 'date-range') {
                     $this.find('.thead-search').append('<td><input type="text" placeholder="From" style="width: 50%" class="date-range-search-field datepicker datatable-filter" name="' + cols[k]['data'] + '_from"/><input type="text" placeholder="To" style="width: 50%" class="date-range-search-field datepicker datatable-filter" name="' + cols[k]['data'] + '_to"/></td>');
