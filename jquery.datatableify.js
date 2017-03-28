@@ -131,22 +131,33 @@
             dataTableOptions.ajaxOrderUrl = $(this).data('datatableAjaxOrderUrl');
         }
         if (dataTableOptions.ajaxOrderUrl != null) {
-            dataTable.on('row-reorder.dt', function (dragEvent, data, nodes) {
-                var rowIndex0 = data[0].node._DT_RowIndex;
-                var rowData0 = dataTable.row(rowIndex0).data();
-                var rowIndex1 = data[1].node._DT_RowIndex;
-                var rowData1 = dataTable.row(rowIndex1).data();
+            dataTable.on('row-reorder.dt', function (dragEvent, diff, edit) {
+                var origin = edit.triggerRow.data();
+
+                if (diff.length == 0) return;
+
+                var rowIndexFirst = diff[0].node._DT_RowIndex;
+                var rowDataFirst = dataTable.row(rowIndexFirst).data();
+
+                var rowIndexSecond = diff[1].node._DT_RowIndex;
+                var rowDataSecond = dataTable.row(rowIndexSecond).data();
+
+                var rowIndexSecondLast = diff[diff.length - 2].node._DT_RowIndex;
+                var rowDataSecondLast = dataTable.row(rowIndexSecondLast).data();
+
+                var rowIndexLast = diff[diff.length - 1].node._DT_RowIndex;
+                var rowDataLast = dataTable.row(rowIndexLast).data();
 
                 $.ajax({
                     url: dataTableOptions.ajaxOrderUrl,
                     type: 'post',
                     dataType: 'json',
                     data: {
-                        from: rowData0.id,
-                        to: rowData1.id
+                        id: origin.id,
+                        before: origin.id == rowDataFirst.id ? rowDataSecond.id : null,
+                        after: origin.id == rowDataLast.id ? rowDataSecondLast.id : null
                     }
                 });
-
             });
 
             $this.addClass('table-reorderable');
