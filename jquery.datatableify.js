@@ -81,20 +81,20 @@
         $this.find('thead th').each(function (k, v) {
             if (cols[k]['searchable'] != false) {                    
                 if (cols[k]['searchType'] == 'select' && typeof cols[k]['searchOptions'] == 'object' && Object.keys(cols[k]['searchOptions']).length > 0) {
-                    $this.find('.thead-search').append('<td><select style="width: 100%" class="simple-search-field select_' + cols[k]['data'] + '"></select></td>');
+                    $this.find('.thead-search').append('<td><select class="simple-search-field select_' + cols[k]['data'] + '"></select></td>');
                     $this.find('.select_' + cols[k]['data']).append('<option value=""></option>');
 
                     for (var i in cols[k]['searchOptions']) {
                         $this.find('.select_' + cols[k]['data']).append('<option value="' + cols[k]['searchOptions'][i].key + '">' + cols[k]['searchOptions'][i].value + '</option>');
                     }
                 } else if (cols[k]['searchType'] == 'date-range') {
-                    $this.find('.thead-search').append('<td><input type="text" placeholder="From" style="width: 50%" class="date-range-search-field datepicker datatable-filter" name="' + cols[k]['data'] + '_from"/><input type="text" placeholder="To" style="width: 50%" class="date-range-search-field datepicker datatable-filter" name="' + cols[k]['data'] + '_to"/></td>');
+                    $this.find('.thead-search').append('<td><input type="text" placeholder="From" class="date-range-search-field datepicker datatable-filter" name="' + cols[k]['data'] + '_from"/><input type="text" placeholder="To" class="date-range-search-field datepicker datatable-filter" name="' + cols[k]['data'] + '_to"/></td>');
                 } else if (cols[k]['searchType'] == 'date') {
-                    $this.find('.thead-search').append('<td><input type="text" placeholder="" style="width: 100%" class="simple-search-field datepicker"/></td>');
+                    $this.find('.thead-search').append('<td><input type="text" placeholder="" class="simple-search-field datepicker"/></td>');
                 } else if (cols[k]['searchType'] == 'custom') {
                     $this.find('.thead-search').append('<td>' + $(cols[k]['searchCustom']).html() + '</td>');
                 } else {
-                    $this.find('.thead-search').append('<td><input type="text" placeholder="" style="width: 100%" class="simple-search-field"/></td>');
+                    $this.find('.thead-search').append('<td><input type="text" placeholder="" class="simple-search-field"/></td>');
                 }
             } else {
                 $this.find('.thead-search').append('<td></td>');
