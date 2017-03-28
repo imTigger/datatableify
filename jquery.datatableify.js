@@ -80,15 +80,18 @@
         $this.find('thead').append('<tr class="thead-search"></tr>');
         $this.find('thead th').each(function (k, v) {
             if (cols[k]['searchable'] != false) {                    
+                var fieldName = cols[k]['data'];
+                fieldName = fieldName.replace('.', '_');
+
                 if (cols[k]['searchType'] == 'select' && typeof cols[k]['searchOptions'] == 'object' && Object.keys(cols[k]['searchOptions']).length > 0) {
-                    $this.find('.thead-search').append('<td><select class="simple-search-field select_' + cols[k]['data'] + '"></select></td>');
-                    $this.find('.select_' + cols[k]['data']).append('<option value=""></option>');
+                    $this.find('.thead-search').append('<td><select class="simple-search-field select_' + fieldName + '"></select></td>');
+                    $this.find('.select_' + fieldName).append('<option value=""></option>');
 
                     for (var i in cols[k]['searchOptions']) {
-                        $this.find('.select_' + cols[k]['data']).append('<option value="' + cols[k]['searchOptions'][i].key + '">' + cols[k]['searchOptions'][i].value + '</option>');
+                        $this.find('.select_' + fieldName).append('<option value="' + cols[k]['searchOptions'][i].key + '">' + cols[k]['searchOptions'][i].value + '</option>');
                     }
                 } else if (cols[k]['searchType'] == 'date-range') {
-                    $this.find('.thead-search').append('<td><input type="text" placeholder="From" class="date-range-search-field datepicker datatable-filter" name="' + cols[k]['data'] + '_from"/><input type="text" placeholder="To" class="date-range-search-field datepicker datatable-filter" name="' + cols[k]['data'] + '_to"/></td>');
+                    $this.find('.thead-search').append('<td><input type="text" placeholder="From" class="date-range-search-field datepicker datatable-filter" name="' + fieldName + '_from"/><input type="text" placeholder="To" class="date-range-search-field datepicker datatable-filter" name="' + fieldName + '_to"/></td>');
                 } else if (cols[k]['searchType'] == 'date') {
                     $this.find('.thead-search').append('<td><input type="text" placeholder="" class="simple-search-field datepicker"/></td>');
                 } else if (cols[k]['searchType'] == 'custom') {
