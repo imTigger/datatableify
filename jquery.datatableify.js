@@ -70,7 +70,9 @@
 
         // Disable paging for order table
         if (dataTableOptions.ajaxOrderUrl != null) {
-            dataTableOptions.rowReorder = true;
+            dataTableOptions.rowReorder = {
+                update: false
+            };
             dataTableOptions.paging = false;
         }
 
@@ -129,8 +131,6 @@
         // Row Reorder
         if ($(this).data('datatableAjaxOrderUrl')) {
             dataTableOptions.ajaxOrderUrl = $(this).data('datatableAjaxOrderUrl');
-        }
-        if (dataTableOptions.ajaxOrderUrl != null) {
             dataTable.on('row-reorder.dt', function (dragEvent, diff, edit) {
                 var origin = edit.triggerRow.data();
 
@@ -156,6 +156,9 @@
                         id: origin.id,
                         before: origin.id == rowDataFirst.id ? rowDataSecond.id : null,
                         after: origin.id == rowDataLast.id ? rowDataSecondLast.id : null
+                    },
+                    success: function() {
+                        dataTable.ajax.reload();
                     }
                 });
             });
