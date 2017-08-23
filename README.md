@@ -2,6 +2,8 @@
 jQuery plugin enable you to use HTML5 data-* attributes to simplified [DataTables](https://datatables.net/DataTables) initialization and configuration.
 It also generate additional header with various types of search fields.
 
+**Deprecated and abondoned in favor of** [imTigger/DataTables-SearchHeader](https://github.com/imTigger/DataTables-SearchHeader)
+
 ## Parameters
 ### &lt;table&gt; Level Options
 - If `data-datatable-ajax-load-url` is set, it will be mapped to `dataTable.ajax.url`.
